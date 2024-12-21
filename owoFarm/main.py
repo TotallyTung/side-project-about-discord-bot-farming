@@ -38,7 +38,7 @@ class Farm(discord.Client):
 			match cmd:
 				case "start":
 					if not self.cid:
-						await ctx.send("> **Use b.channel _<channel_id>_ to set channel.**")
+						await ctx.send("> **Use b.channel _<channel\_id>_ to set channel.**")
 					elif not self.isfarm:
 						print("[!] Started.")
 						self.isfarm = True
