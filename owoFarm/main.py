@@ -4,7 +4,7 @@ from discord.ext import tasks
 from win10toast import ToastNotifier
 
 notifier = ToastNotifier()
-captchaFilter = ["captcha", "resul​t i​n a​ ban", "ar​e yo​u a​ rea​l huma​n"]
+captchaFilter = ["captch​a", "resul​t i​n a​ ban", "ar​e yo​u a​ rea​l huma​n", "a​re huma​n"]
 
 class Farm(discord.Client):
 	def __init__(self, *args, **kwargs):
@@ -25,11 +25,12 @@ class Farm(discord.Client):
 		if msg.author.id == 408785106942164992 and msg.channel.id == self.cid:
 			if any(check in msg.content for check in captchaFilter) and self.isfarm:
 				self.farmTask.cancel()
+				self.isfarm = False
 				print("[!] Captcha detected!")
 				r = await ctx.send(f"<@{str(self.user.id)}>")
 				await r.unack()
 				del r
-				notifier.show_toast(title="OwO Farm", msg="Please verify the captcha and start again.", duration=20, threaded=True)
+				notifier.show_toast(title="OwO Farm", msg="Please verify the captcha and start again.", duration=20)
 	
 		if msg.author == self.user and msg.content.lower()[:2] == "b.":
 			cmd=msg.content[2:].strip()
